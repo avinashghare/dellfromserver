@@ -44,7 +44,7 @@
                 {
                     resultrow.json="";
                 }
-                return "<tr><td>" + resultrow.id + "</td><td><a href='<?php echo site_url('site/edituser?id=');?>"+resultrow.id +"'>" + resultrow.name + "</a></td><td>" + resultrow.email + "</td><td>" + resultrow.contact + "</td><td>" + resultrow.dob + "</td><td>" + resultrow.accesslevelname + "</td><td><a class='btn btn-round btn-xs' href='<?php echo site_url('site/edituser?id=');?>"+resultrow.id +"'><i class='icon-pencil'></i></a><a class='btn btn-round btn-xs' href='<?php echo site_url('site/deleteuser?id='); ?>"+resultrow.id +"'><i class='icon-trash '></i></a></td><tr>";
+                return "<tr><td>" + resultrow.id + "</td><td><a href='<?php echo site_url('site/edituser?id=');?>"+resultrow.id +"'>" + resultrow.name + "</a></td><td>" + resultrow.email + "</td><td>" + resultrow.contact + "</td><td>" + resultrow.dob + "</td><td>" + resultrow.accesslevelname + "</td><td><a class='btn btn-round btn-xs' href='<?php echo site_url('site/edituser?id=');?>"+resultrow.id +"'><i class='icon-pencil'></i></a><a class='btn btn-round btn-xs' href='<?php echo site_url('site/deleteuser?id='); ?>"+resultrow.id +"' onclick=\"return confirm('Are you sure?')\"><i class='icon-trash '></i></a></td><tr>";
             }
             generatejquery('<?php echo $base_url;?>');
         </script>

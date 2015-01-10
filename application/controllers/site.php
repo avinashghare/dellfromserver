@@ -210,7 +210,7 @@ class Site extends CI_Controller
         $elements[6]=new stdClass();
         $elements[6]->field="`accesslevel`.`name`";
         $elements[6]->sort="1";
-        $elements[6]->header="Accesslevel";
+        $elements[6]->header="Access level";
         $elements[6]->alias="accesslevelname";
        
         $elements[7]=new stdClass();

@@ -236,7 +236,7 @@ LEFT OUTER JOIN `user` ON `user`.`id`=`userpost`.`user`
 	public function getaccesslevels()
 	{
 		$return=array();
-		$query=$this->db->query("SELECT * FROM `accesslevel` ORDER BY `id` ASC")->result();
+		$query=$this->db->query("SELECT * FROM `accesslevel` ORDER BY `id` DESC")->result();
 		$accesslevel=$this->session->userdata('accesslevel');
 			foreach($query as $row)
 			{
