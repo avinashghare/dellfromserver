@@ -1394,6 +1394,18 @@ class Site extends CI_Controller
         $elements[3]->header="timestamp";
         $elements[3]->alias="timestamp";
         
+        $elements[4]=new stdClass();
+        $elements[4]->field="`suggestion`.`suggestionstatus`";
+        $elements[4]->sort="1";
+        $elements[4]->header="Status";
+        $elements[4]->alias="suggestionstatus";
+        
+        $elements[5]=new stdClass();
+        $elements[5]->field="`suggestion`.`adminmessage`";
+        $elements[5]->sort="1";
+        $elements[5]->header="Admin Message";
+        $elements[5]->alias="adminmessage";
+        
         
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
@@ -1421,7 +1433,7 @@ class Site extends CI_Controller
 		$access = array("2");
 		$this->checkaccess($access);
 		$data[ 'page' ] = 'createsuggestion';
-//        $data['posttype']=$this->post_model->getposttypedropdown();
+        $data['suggestionstatus']=$this->suggestion_model->getsuggestionstatusdropdown();
 		$data[ 'title' ] = 'Create suggestion';
 		$this->load->view( 'template', $data );	
 	}
@@ -1435,6 +1447,7 @@ class Site extends CI_Controller
 			$data['alerterror'] = validation_errors();
             $data[ 'page' ] = 'createsuggestion';
             $data[ 'title' ] = 'Create suggestion';
+            $data['suggestionstatus']=$this->suggestion_model->getsuggestionstatusdropdown();
             $this->load->view( 'template', $data );	
 		}
 		else
@@ -1487,6 +1500,7 @@ class Site extends CI_Controller
 		$this->checkaccess($access);
 		$data['page']='editsuggestion';
 		$data['title']='Edit suggestion';
+        $data['suggestionstatus']=$this->suggestion_model->getsuggestionstatusdropdown();
 		$data['before']=$this->suggestion_model->beforeedit($this->input->get('id'));
 		$this->load->view('template',$data);
 	}
@@ -1501,6 +1515,7 @@ class Site extends CI_Controller
 			$data['alerterror'] = validation_errors();
 			$data['page']='editsuggestion';
             $data['title']='Edit suggestion';
+            $data['suggestionstatus']=$this->suggestion_model->getsuggestionstatusdropdown();
             $data['before']=$this->suggestion_model->beforeedit($this->input->get('id'));
             $this->load->view('template',$data);
 		}
@@ -1509,7 +1524,29 @@ class Site extends CI_Controller
             
             $id=$this->input->get_post('id');
             $text=$this->input->get_post('text');
-            $userid=$this->session->userdata('id');
+            $suggestionstatus=$this->input->get_post('suggestionstatus');
+            $message=$this->input->get_post('message');
+            $user=$this->input->get_post('user');
+            $email=$this->user_model->getemailbyuserid($user);
+            if($suggestionstatus=='Publish')
+            {
+                    $this->load->library('email');
+                    $this->email->from('avinashghare572@gmail.com', 'Dell');
+                    $this->email->to($email);
+                    $this->email->subject('Dell Campassador');
+                    $this->email->message('Your Post Is Approved.');
+                    $this->email->send();
+            }
+            elseif($suggestionstatus=='Unpublish')
+            {
+                    $this->load->library('email');
+                    $this->email->from('avinashghare572@gmail.com', 'Dell');
+                    $this->email->to($email);
+                    $this->email->subject('Dell Campassador');
+                    $this->email->message($message);
+                    $this->email->send();
+            }
+//            $userid=$this->session->userdata('id');
             
             $config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -1548,7 +1585,7 @@ class Site extends CI_Controller
                 $image=$image->image;
             }
             
-			if($this->suggestion_model->edit($id,$text,$image,$userid)==0)
+			if($this->suggestion_model->edit($id,$text,$image,$user,$suggestionstatus,$message)==0)
 			$data['alerterror']="suggestion Editing was unsuccesful";
 			else
 			$data['alertsuccess']="suggestion edited Successfully.";
@@ -1610,6 +1647,18 @@ class Site extends CI_Controller
         $elements[3]->sort="1";
         $elements[3]->header="timestamp";
         $elements[3]->alias="timestamp";
+        
+        $elements[4]=new stdClass();
+        $elements[4]->field="`suggestion`.`suggestionstatus`";
+        $elements[4]->sort="1";
+        $elements[4]->header="Status";
+        $elements[4]->alias="suggestionstatus";
+        
+        $elements[5]=new stdClass();
+        $elements[5]->field="`suggestion`.`adminmessage`";
+        $elements[5]->sort="1";
+        $elements[5]->header="Admin Message";
+        $elements[5]->alias="adminmessage";
         
         
         $search=$this->input->get_post("search");

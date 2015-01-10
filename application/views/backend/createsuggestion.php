@@ -16,7 +16,8 @@
 				<div class="form-group">
 				  <label class="col-sm-2 control-label" for="normal-field">Text</label>
 				  <div class="col-sm-4">
-					<input type="text" id="normal-field" class="form-control" name="text" value="<?php echo set_value('text');?>">
+<!--					<input type="text" id="normal-field" class="form-control" name="text" value="<?php echo set_value('text');?>">-->
+              <textarea name="text"  class="form-control contenttext"><?php echo set_value('text');?></textarea>
 				  </div>
 				</div>
 				
@@ -26,6 +27,17 @@
 					<input type="file" id="normal-field" class="form-control" name="image" value="<?php echo set_value('image');?>">
 				  </div>
 				</div>
+<!--
+				<div class=" form-group">
+				  <label class="col-sm-2 control-label">Status</label>
+				  <div class="col-sm-4">
+					<?php
+						
+						echo form_dropdown('status',$status,set_value('status'),'class="chzn-select form-control" 	data-placeholder="Choose a Accesslevel..."');
+					?>
+				  </div>
+				</div>
+-->
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label">&nbsp;</label>
 				  <div class="col-sm-4">

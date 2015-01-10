@@ -183,6 +183,12 @@ LEFT OUTER JOIN `user` ON `user`.`id`=`userpost`.`user`
 		$query=$this->db->query("SELECT `image` FROM `user` WHERE `id`='$id'")->row();
 		return $query;
 	}
+	public function getemailbyuserid($id)
+	{
+		$query=$this->db->query("SELECT `email` FROM `user` WHERE `id`='$id'")->row();
+        $email=$query->email;
+		return $email;
+	}
 	function deleteuser($id)
 	{
 		$query=$this->db->query("DELETE FROM `user` WHERE `id`='$id'");

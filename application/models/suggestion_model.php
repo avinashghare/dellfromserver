@@ -8,6 +8,7 @@ class suggestion_model extends CI_Model
 		$data  = array(
 			'text' => $text,
 			'user' => $user,
+			'suggestionstatus' => 'Pending',
 			'image' => $image
 		);
 		$query=$this->db->insert( 'suggestion', $data );
@@ -31,11 +32,13 @@ class suggestion_model extends CI_Model
 		return $query;
 	}
 	
-	public function edit($id,$text,$image,$user)
+	public function edit($id,$text,$image,$user,$suggestionstatus,$message)
 	{
 		$data  = array(
 			'text' => $text,
 			'user' => $user,
+			'suggestionstatus' => $suggestionstatus,
+			'adminmessage' => $message,
 			'image' => $image
 		);
 		$this->db->where( 'id', $id );
@@ -65,6 +68,16 @@ class suggestion_model extends CI_Model
 		
 		return $return;
 	}
+	public function getsuggestionstatusdropdown()
+	{
+		$status= array(
+			 "Pending" => "Pending",
+			 "Publish" => "Publish",
+			 "Unpublish" => "Unpublish"
+			);
+		return $status;
+	}
+	
 }
 	
 ?>
