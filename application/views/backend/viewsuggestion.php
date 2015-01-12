@@ -38,7 +38,7 @@
                 {
                     resultrow.adminstatus="";
                 }
-                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td><img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'></td><td>" + resultrow.suggestionstatus + "</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><tr>";
+                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td><img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'></td>"if(resultrow.suggestionstatus=='Publish'){"<td>Approved</td>"} else if(resultrow.suggestionstatus=='Unpublish'){"<td>Unapproved</td>"}else{"<td>Pending</td>"}"<td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><tr>";
             }
             generatejquery('<?php echo $base_url;?>');
         </script>

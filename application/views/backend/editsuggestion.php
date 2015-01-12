@@ -38,10 +38,10 @@
 				  </div>
 				</div>
 			<?php	
-        if($before->suggestionstatus=='Unpublish')
-        {
+//        if($before->suggestionstatus=='Unpublish')
+//        {
         ?>
-				<div class="form-group suggestionmessage">
+				<div class="form-group suggestionmessage" style="display:none;">
 				  <label class="col-sm-2 control-label" for="normal-field">Comment</label>
 				  <div class="col-sm-4">
 <!--					<input type="text" id="normal-field" class="form-control" name="text" value="<?php echo set_value('text',$before->text);?>">-->
@@ -49,7 +49,9 @@
               <textarea name="message"  class="form-control"><?php echo set_value('message',$before->adminmessage);?></textarea>
 				  </div>
 				</div>
-<?php } ?>
+<?php 
+//} 
+                  ?>
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label">&nbsp;</label>
 				  <div class="col-sm-4">

@@ -255,12 +255,298 @@ class Site extends CI_Controller
             $orderorder="ASC";
         }
        
-        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `user` LEFT OUTER JOIN `accesslevel` ON `accesslevel`.`id`=`user`.`accesslevel` ");
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `user` LEFT OUTER JOIN `accesslevel` ON `accesslevel`.`id`=`user`.`accesslevel` ","WHERE `user`.`accesslevel`=1");
         
 		$this->load->view("json",$data);
 	} 
     
+    function viewnormalusers()
+	{
+		$access = array("1");
+		$this->checkaccess($access);
+		$data['page']='viewnormaluser';
+        $data['base_url'] = site_url("site/viewnormalusersjson");
+        
+		$data['title']='View Students';
+		$this->load->view('template',$data);
+	} 
+    function viewnormalusersjson()
+	{
+		$access = array("1");
+		$this->checkaccess($access);
+        
+        
+        $elements=array();
+        $elements[0]=new stdClass();
+        $elements[0]->field="`user`.`id`";
+        $elements[0]->sort="1";
+        $elements[0]->header="ID";
+        $elements[0]->alias="id";
+        
+        
+        $elements[1]=new stdClass();
+        $elements[1]->field="`user`.`name`";
+        $elements[1]->sort="1";
+        $elements[1]->header="Name";
+        $elements[1]->alias="name";
+        
+        $elements[2]=new stdClass();
+        $elements[2]->field="`user`.`email`";
+        $elements[2]->sort="1";
+        $elements[2]->header="Email";
+        $elements[2]->alias="email";
+        
+        $elements[3]=new stdClass();
+        $elements[3]->field="`user`.`contact`";
+        $elements[3]->sort="1";
+        $elements[3]->header="Contact";
+        $elements[3]->alias="contact";
+        
+        $elements[4]=new stdClass();
+        $elements[4]->field="`user`.`timestamp`";
+        $elements[4]->sort="1";
+        $elements[4]->header="Timestamp";
+        $elements[4]->alias="timestamp";
+        
+        $elements[5]=new stdClass();
+        $elements[5]->field="`user`.`dob`";
+        $elements[5]->sort="1";
+        $elements[5]->header="Dob";
+        $elements[5]->alias="dob";
+       
+        $elements[6]=new stdClass();
+        $elements[6]->field="`accesslevel`.`name`";
+        $elements[6]->sort="1";
+        $elements[6]->header="Access level";
+        $elements[6]->alias="accesslevelname";
+       
+        $elements[7]=new stdClass();
+        $elements[7]->field="`user`.`facebookid`";
+        $elements[7]->sort="1";
+        $elements[7]->header="Facebookid";
+        $elements[7]->alias="facebookid";
+       
+        $elements[8]=new stdClass();
+        $elements[8]->field="`user`.`twitterid`";
+        $elements[8]->sort="1";
+        $elements[8]->header="twitterid";
+        $elements[8]->alias="twitterid";
+       
+        $elements[9]=new stdClass();
+        $elements[9]->field="`user`.`instagramid`";
+        $elements[9]->sort="1";
+        $elements[9]->header="instagramid";
+        $elements[9]->alias="instagramid";
+       
+        
+        $elements[10]=new stdClass();
+        $elements[10]->field="`user`.`city`";
+        $elements[10]->sort="1";
+        $elements[10]->header="city";
+        $elements[10]->alias="city";
+       
+        
+        $search=$this->input->get_post("search");
+        $pageno=$this->input->get_post("pageno");
+        $orderby=$this->input->get_post("orderby");
+        $orderorder=$this->input->get_post("orderorder");
+        $maxrow=$this->input->get_post("maxrow");
+        if($maxrow=="")
+        {
+            $maxrow=20;
+        }
+        
+        if($orderby=="")
+        {
+            $orderby="id";
+            $orderorder="ASC";
+        }
+       
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `user` LEFT OUTER JOIN `accesslevel` ON `accesslevel`.`id`=`user`.`accesslevel` ","WHERE `user`.`accesslevel`='2'");
+        
+		$this->load->view("json",$data);
+	} 
+    public function createnormaluser()
+	{
+		$access = array("1");
+		$this->checkaccess($access);
+		$data['accesslevel']=$this->user_model->getaccesslevels();
+		$data[ 'status' ] =$this->user_model->getstatusdropdown();
+		$data[ 'sex' ] =$this->user_model->getsexdropdown();
+		$data[ 'college' ] =$this->college_model->getcollegedropdown();
+		$data[ 'logintype' ] =$this->user_model->getlogintypedropdown();
+//        $data['category']=$this->category_model->getcategorydropdown();
+		$data[ 'page' ] = 'createnormaluser';
+		$data[ 'title' ] = 'Create Student';
+		$this->load->view( 'template', $data );	
+	}
+	function createnormalusersubmit()
+	{
+		$access = array("1");
+		$this->checkaccess($access);
+		$this->form_validation->set_rules('name','Name','trim|required|max_length[30]');
+		$this->form_validation->set_rules('email','Email','trim|required|valid_email|is_unique[user.email]');
+		$this->form_validation->set_rules('password','Password','trim|required|min_length[6]|max_length[30]');
+		$this->form_validation->set_rules('confirmpassword','Confirm Password','trim|required|matches[password]');
+//		$this->form_validation->set_rules('accessslevel','Accessslevel','trim');
+//		$this->form_validation->set_rules('status','status','trim|');
+		$this->form_validation->set_rules('contact','contact','trim');
+		$this->form_validation->set_rules('facebookid','facebookid','trim');
+		$this->form_validation->set_rules('twitterid','twitterid','trim');
+		$this->form_validation->set_rules('instagramid','instagramid','trim');
+		$this->form_validation->set_rules('dob','dob','trim');
+		$this->form_validation->set_rules('sex','sex','trim');
+		$this->form_validation->set_rules('college','college','trim');
+		$this->form_validation->set_rules('city','city','trim');
+//		$this->form_validation->set_rules('json','json','trim');
+		if($this->form_validation->run() == FALSE)	
+		{
+			$data['alerterror'] = validation_errors();
+			$data['accesslevel']=$this->user_model->getaccesslevels();
+            $data[ 'status' ] =$this->user_model->getstatusdropdown();
+            $data[ 'sex' ] =$this->user_model->getsexdropdown();
+            $data[ 'college' ] =$this->college_model->getcollegedropdown();
+            $data[ 'logintype' ] =$this->user_model->getlogintypedropdown();
+    //        $data['category']=$this->category_model->getcategorydropdown();
+            $data[ 'page' ] = 'createuser';
+            $data[ 'title' ] = 'Create User';
+            $this->load->view( 'template', $data );		
+		}
+		else
+		{
+            $name=$this->input->post('name');
+            $email=$this->input->post('email');
+            $password=$this->input->post('password');
+            $accesslevel=2;
+//            $accesslevel=$this->input->post('accesslevel');
+//            $status=$this->input->post('status');
+            $contact=$this->input->post('contact');
+            $facebookid=$this->input->post('facebookid');
+            $twitterid=$this->input->post('twitterid');
+            $instagramid=$this->input->post('instagramid');
+            $dob=$this->input->post('dob');
+            $sex=$this->input->post('sex');
+            $college=$this->input->post('college');
+            $city=$this->input->post('city');
+            
+			if($dob != "")
+			{
+				$dob = date("Y-m-d",strtotime($dob));
+			}
+            
+			if($this->user_model->create($name,$email,$password,$accesslevel,$contact,$facebookid,$twitterid,$instagramid,$dob,$sex,$college,$city)==0)
+			$data['alerterror']="New student could not be created.";
+			else
+			$data['alertsuccess']="Student created Successfully.";
+			$data['redirect']="site/viewnormalusers";
+			$this->load->view("redirect",$data);
+		}
+	}
     
+	function editadminnormaluser()
+	{
+		$access = array("1");
+		$this->checkaccess($access);
+        $userid=$this->input->get('id');
+		$data[ 'status' ] =$this->user_model->getstatusdropdown();
+		$data['accesslevel']=$this->user_model->getaccesslevels();
+		$data[ 'logintype' ] =$this->user_model->getlogintypedropdown();
+        $data[ 'sex' ] =$this->user_model->getsexdropdown();
+		$data[ 'college' ] =$this->college_model->getcollegedropdown();
+		$data['before']=$this->user_model->beforeedit($this->input->get('id'));
+//		$data['before']=$this->user_model->beforeedit($userid);
+		$data['table']=$this->userpost_model->viewuserpostbyuser($userid);
+		$data['page']='editadminnormaluser';
+		$data['page2']='block/userblock';
+		$data['title']='Edit Student';
+		$this->load->view('template',$data);
+	}
+	function editadminnormalusersubmit()
+	{
+		$access = array("1");
+		$this->checkaccess($access);
+		
+		$this->form_validation->set_rules('name','Name','trim|required|max_length[30]');
+		$this->form_validation->set_rules('email','Email','trim|required|valid_email');
+		$this->form_validation->set_rules('password','Password','trim|min_length[6]|max_length[30]');
+		$this->form_validation->set_rules('confirmpassword','Confirm Password','trim|matches[password]');
+		$this->form_validation->set_rules('accessslevel','Accessslevel','trim');
+//		$this->form_validation->set_rules('status','status','trim|');
+		$this->form_validation->set_rules('contact','contact','trim');
+        
+		$this->form_validation->set_rules('facebookid','facebookid','trim');
+		$this->form_validation->set_rules('twitterid','twitterid','trim');
+		$this->form_validation->set_rules('instagramid','instagramid','trim');
+		$this->form_validation->set_rules('dob','dob','trim');
+		$this->form_validation->set_rules('sex','sex','trim');
+		$this->form_validation->set_rules('college','college','trim');
+		$this->form_validation->set_rules('city','city','trim');
+        
+		if($this->form_validation->run() == FALSE)	
+		{
+			$data['alerterror'] = validation_errors();
+			$data[ 'status' ] =$this->user_model->getstatusdropdown();
+			$data['accesslevel']=$this->user_model->getaccesslevels();
+            $data[ 'logintype' ] =$this->user_model->getlogintypedropdown();
+            $data[ 'sex' ] =$this->user_model->getsexdropdown();
+            $data[ 'college' ] =$this->college_model->getcollegedropdown();
+			$data['before']=$this->user_model->beforeedit($this->input->post('id'));
+			$data['page']='editadminnormalusersubmit';
+//			$data['page2']='block/userblock';
+			$data['title']='Edit Student';
+			$this->load->view('template',$data);
+		}
+		else
+		{
+            
+            $id=$this->input->get_post('id');
+            $name=$this->input->get_post('name');
+            $email=$this->input->get_post('email');
+            $password=$this->input->get_post('password');
+            $accesslevel=2;
+//            $accesslevel=$this->input->get_post('accesslevel');
+//            $status=$this->input->get_post('status');
+            $contact=$this->input->get_post('contact');
+            
+            $facebookid=$this->input->post('facebookid');
+            $twitterid=$this->input->post('twitterid');
+            $instagramid=$this->input->post('instagramid');
+            $dob=$this->input->post('dob');
+            $sex=$this->input->post('sex');
+            $college=$this->input->post('college');
+            $city=$this->input->post('city');
+//            $category=$this->input->get_post('category');
+            
+            
+			if($dob != "")
+			{
+				$dob = date("Y-m-d",strtotime($dob));
+			}
+            
+			if($this->user_model->edit($id,$name,$email,$password,$accesslevel,$contact,$facebookid,$twitterid,$instagramid,$dob,$sex,$college,$city)==0)
+			$data['alerterror']="Student Editing was unsuccesful";
+			else
+			$data['alertsuccess']="Student edited Successfully.";
+			
+			$data['redirect']="site/viewnormalusers";
+			//$data['other']="template=$template";
+			$this->load->view("redirect",$data);
+			
+		}
+	}
+	
+	function deletenormaluser()
+	{
+		$access = array("1");
+		$this->checkaccess($access);
+		$this->user_model->deleteuser($this->input->get('id'));
+//		$data['table']=$this->user_model->viewusers();
+		$data['alertsuccess']="Student Deleted Successfully";
+		$data['redirect']="site/viewnormalusers";
+			//$data['other']="template=$template";
+		$this->load->view("redirect",$data);
+	}
+	
 	function edituser()
 	{
 		$access = array("1");
@@ -1277,6 +1563,7 @@ class Site extends CI_Controller
             $dob=$this->input->post('dob');
             $sex=$this->input->post('sex');
             $college=$this->input->post('college');
+            $city=$this->input->post('city');
 //            $category=$this->input->get_post('category');
             
 //            echo $accesslevel;
@@ -1285,7 +1572,7 @@ class Site extends CI_Controller
 				$dob = date("Y-m-d",strtotime($dob));
 			}
             
-			if($this->user_model->edit($id,$name,$email,$password,$accesslevel,$contact,$facebookid,$twitterid,$instagramid,$dob,$sex,$college)==0)
+			if($this->user_model->edit($id,$name,$email,$password,$accesslevel,$contact,$facebookid,$twitterid,$instagramid,$dob,$sex,$college,$city)==0)
 			$data['alerterror']="Profile Editing was unsuccesful";
 			else
 			$data['alertsuccess']="Profile edited Successfully.";
@@ -1528,24 +1815,24 @@ class Site extends CI_Controller
             $message=$this->input->get_post('message');
             $user=$this->input->get_post('user');
             $email=$this->user_model->getemailbyuserid($user);
-            if($suggestionstatus=='Publish')
-            {
-                    $this->load->library('email');
-                    $this->email->from('avinashghare572@gmail.com', 'Dell');
-                    $this->email->to($email);
-                    $this->email->subject('Dell Campassador');
-                    $this->email->message('Your Post Is Approved.');
-                    $this->email->send();
-            }
-            elseif($suggestionstatus=='Unpublish')
-            {
-                    $this->load->library('email');
-                    $this->email->from('avinashghare572@gmail.com', 'Dell');
-                    $this->email->to($email);
-                    $this->email->subject('Dell Campassador');
-                    $this->email->message($message);
-                    $this->email->send();
-            }
+//            if($suggestionstatus=='Publish')
+//            {
+//                    $this->load->library('email');
+//                    $this->email->from('avinashghare572@gmail.com', 'Dell');
+//                    $this->email->to($email);
+//                    $this->email->subject('Dell Campassador');
+//                    $this->email->message('Your Post Is Approved.');
+//                    $this->email->send();
+//            }
+//            elseif($suggestionstatus=='Unpublish')
+//            {
+//                    $this->load->library('email');
+//                    $this->email->from('avinashghare572@gmail.com', 'Dell');
+//                    $this->email->to($email);
+//                    $this->email->subject('Dell Campassador');
+//                    $this->email->message($message);
+//                    $this->email->send();
+//            }
 //            $userid=$this->session->userdata('id');
             
             $config['upload_path'] = './uploads/';

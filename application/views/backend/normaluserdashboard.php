@@ -77,7 +77,6 @@
 <div class="row">
     
 <div class="row">
-
 	<div class="col-md-12">
 		<section class="panel">
 			<div class="drawchintantable">
@@ -95,7 +94,17 @@
                     <?php foreach($quickposts as $key => $post) { ?>
                     <div class="item <?php if($key==0) {
     echo "active";
-}?>"><div class="image"><img class="img-responsive" src="<?php echo base_url("uploads/$post->image"); ?>"></div><div class="text"><?php echo $post->text;?></div><div class="buttons text-center"><a href="#" class="btn btn-primary" onclick="postsocial('3','Dell tablet','<?php echo base_url("uploads/$post->image"); ?>','<?php echo strtolower($post->posttypename);?>')">
+}?>">
+<?php
+    if(strtolower($post->posttypename) == 'twitter')
+    {
+    }
+    else
+    {
+        ?>
+<div class="image"><img class="img-responsive" src="<?php echo base_url("uploads/$post->image"); ?>"></div>
+   <?php }?>
+<div class="text"><?php echo $post->text;?></div><div class="buttons text-center"><a href="#" class="btn btn-primary" onclick="postsocial('3','Dell tablet','<?php echo base_url("uploads/$post->image"); ?>','<?php echo strtolower($post->posttypename);?>')">
 <?php 
 if ( strtolower($post->posttypename) == 'twitter')
  {echo '<i class="fa fa-twitter"></i>&nbsp;Tweet';}

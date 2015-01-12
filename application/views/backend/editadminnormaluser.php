@@ -3,7 +3,7 @@
 				 User Details
 			</header>
 			<div class="panel-body">
-			  <form class="form-horizontal tasi-form" method="post" action="<?php echo site_url('site/editnormalusersubmit');?>" enctype= "multipart/form-data">
+			  <form class="form-horizontal tasi-form" method="post" action="<?php echo site_url('site/editadminnormalusersubmit');?>" enctype= "multipart/form-data">
 			  
 				<input type="hidden" id="normal-field" class="form-control" name="id" value="<?php echo set_value('id',$before->id);?>" style="display:none;">
 				<div class="form-group">
@@ -126,7 +126,7 @@
 				  <label class="col-sm-2 control-label">&nbsp;</label>
 				  <div class="col-sm-4">
 				  <button type="submit" class="btn btn-primary">Save</button>
-				  <a href="<?php echo site_url('site/viewnormaluserprofile'); ?>" class="btn btn-secondary">Cancel</a>
+				  <a href="<?php echo site_url('site/viewnormalusers'); ?>" class="btn btn-secondary">Cancel</a>
 				</div>
 				</div>
 			  </form>
