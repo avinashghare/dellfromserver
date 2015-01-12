@@ -104,7 +104,7 @@
         ?>
 <div class="image"><img class="img-responsive" src="<?php echo base_url("uploads/$post->image"); ?>"></div>
    <?php }?>
-<div class="text"><?php echo $post->text;?></div><div class="buttons text-center"><a href="#" class="btn btn-primary" onclick="postsocial('3','Dell tablet','<?php echo base_url("uploads/$post->image"); ?>','<?php echo strtolower($post->posttypename);?>')">
+<div class="text"><?php echo $post->text;?></div><div class="buttons text-center"><a href="#" class="btn btn-primary" onclick="postsocial('<?php echo $post->id;?>','<?php echo $post->text;?>','<?php echo base_url("uploads/$post->image"); ?>','<?php echo strtolower($post->posttypename);?>','<?php echo $post->link; ?>')">
 <?php 
 if ( strtolower($post->posttypename) == 'twitter')
  {echo '<i class="fa fa-twitter"></i>&nbsp;Tweet';}

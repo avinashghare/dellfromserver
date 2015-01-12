@@ -1,5 +1,5 @@
 var $container;
-var newbase_url="";
+
 function postsocial(id,message,image,viasource,link) {
     console.log(message);
     console.log(image);
@@ -7,6 +7,7 @@ function postsocial(id,message,image,viasource,link) {
     console.log(link);
             if(viasource=="facebook")
             {
+               
                 window.location.href=newbase_url+"index.php/hauth/postfb?id="+id+"&message="+message+"&image="+image+"&link="+link;
                 
             }

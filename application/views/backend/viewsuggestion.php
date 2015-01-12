@@ -22,7 +22,7 @@
                         <th data-field="suggestionstatus">Status</th>
                         <th data-field="adminmessage">Admin Message</th>
                         <th data-field="timestamp">Timestamp</th>
-<!--                        <th data-field="action"> Actions </th>-->
+                        <th data-field="action"> Actions </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,28 @@
                 {
                     resultrow.adminstatus="";
                 }
-                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td><img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'></td>"if(resultrow.suggestionstatus=='Publish'){"<td>Approved</td>"} else if(resultrow.suggestionstatus=='Unpublish'){"<td>Unapproved</td>"}else{"<td>Pending</td>"}"<td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><tr>";
+                var status="";
+                
+                if(resultrow.suggestionstatus=="Publish")
+                {
+                    status="Approved";
+                }
+                else if(resultrow.suggestionstatus=="Unublish")
+                {
+                    status="UnApproved";
+                }
+                else
+                {
+                    status="Pending";
+                }
+                if(resultrow.suggestionstatus=="Publish")
+                {
+                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td><img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'></td><td>"+status+"</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td><a href='#' class='btn btn-primary'  onclick=\"postsocial('"+resultrow.id+"','"+resultrow.text+"','" + base_url + "uploads/" + resultrow.image + "','facebook','')\">Publish</a></td><tr>";
+                }
+                else
+                {
+                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td><img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'></td><td>"+status+"</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td></td><tr>";
+                }
             }
             generatejquery('<?php echo $base_url;?>');
         </script>

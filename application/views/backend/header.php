@@ -30,6 +30,10 @@
     <script src="<?php echo base_url('assets/js/select2.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/masonry.pkgd.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
+    <script type="text/javascript">
+    var base_url="<?php echo base_url(); ?>";
+        newbase_url=base_url;
+    </script>
 <script>
 $(document).ready(function(){
 		$('.datetime').datepicker({

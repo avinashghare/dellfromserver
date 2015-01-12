@@ -5,6 +5,8 @@ if(isset($alert))
 echo "&alert=$alert";
 if(isset($alertwarning))
 echo "&alertwarning=$alertwarning";
+if(isset($alerterror))
+echo "&alerterror=$alerterror";
 if(isset($alertsuccess))
 echo "&alertsuccess=$alertsuccess";
 if(isset($other))
