@@ -47,9 +47,9 @@
 				
 				
 				<div class=" form-group">
-				  <label class="col-sm-2 control-label" for="normal-field">city</label>
+				  <label class="col-sm-2 control-label" for="normal-field">City</label>
 				  <div class="col-sm-4">
-					<input type="text" id="normal-field" class="form-control" name="city" value="<?php echo set_value('city');?>">
+					<input type="text" id="normal-field" class="form-control" style="text-transform:capitalize" name="city" value="<?php echo set_value('city');?>">
 				  </div>
 				</div>
 				
