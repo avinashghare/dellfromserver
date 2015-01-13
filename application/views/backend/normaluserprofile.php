@@ -16,10 +16,7 @@
        <h5><?php echo $table->sex;?><br></h5>
        <h5><?php echo "DOB: ".$table->dob;?><br></h5>
        <h5><?php echo "Studied at ".$table->collegename;?><br></h5>
-   </div>
-   <div class="clearfix"></div>
-</div>
-
+       
 <div class=" row" style="padding:1% 0;">
 	<div class="col-md-12 text-center">
 	
@@ -28,6 +25,10 @@
 	</div>
 	
 </div>
+   </div>
+   <div class="clearfix"></div>
+</div>
+
 
 <div class="row">
 	<div class="col-lg-12">

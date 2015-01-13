@@ -28,7 +28,7 @@
 		<script>
             function drawtable(resultrow) {
                 
-                return "<tr><td>" + resultrow.rank + "</td><td>" + resultrow.name + "</td><td>" + resultrow.college + "</td><td>" + resultrow.facebook + "</td><td>" + resultrow.twitter + "</td><td>" + resultrow.score + "</td><tr>";
+                return "<tr><td>" + resultrow.rank + "</td><td><a href='<?php echo site_url('site/edituser?id=');?>"+resultrow.id +"'>" + resultrow.name + "</a></td><td>" + resultrow.college + "</td><td>" + resultrow.facebook + "</td><td>" + resultrow.twitter + "</td><td>" + resultrow.score + "</td><tr>";
             }
             generatejquery('<?php echo $base_url;?>');
         </script>

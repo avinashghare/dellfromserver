@@ -1,14 +1,17 @@
 @font-face {
-    font-family: Fontfamily;
+    font-family: 'Museo';
     src: url(Museo_700.otf);
+    font-weight: 700;
 }
 @font-face {
-    font-family: Fontfamily;
+    font-family: 'Museo';
     src: url(Museo_500.otf);
+    font-weight: 500;
 }
 @font-face {
-    font-family: Fontfamily;
+    font-family: 'Museo';
     src: url(Museo_300.otf);
+    font-weight: normal;
 }
 
 
@@ -24,12 +27,12 @@ div#ascrail2000 div {
 }
 h1, h2, h3, h4, h5, h6
 {
-font-family: Fontfamily;
+font-family: 'Museo';
 }
 body {
     color: #40A8D6;
     background: #fff;
-    font-family: Fontfamily;
+    font-family: 'Museo';
     padding: 0px !important;
     margin: 0px !important;
     font-size: 13px;
@@ -79,7 +82,7 @@ a:focus {
     font-size: 20px;
     text-transform: uppercase;
     font-weight: 300;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Museo', sans-serif;
     display: inline-block;
     width: 49.5%;
 }
@@ -93,7 +96,7 @@ a:focus {
     font-weight: normal;
     color: #b6b6b6;
     font-weight: 300;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Museo', sans-serif;
 }
 .form-signin .form-control {
     position: relative;
@@ -124,7 +127,7 @@ a:focus {
     color: #fff;
     text-transform: uppercase;
     font-weight: 300;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Museo', sans-serif;
     margin-bottom: 20px;
     border: 1px solid #47abd7;
 }
@@ -1947,11 +1950,11 @@ ul.inbox-pagination li {
 }
 .modal-header h4.modal-title {
     font-weight: 300;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Museo', sans-serif;
 }
 .modal-body label {
     font-weight: 400;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Museo', sans-serif;
 }
 /*404 page*/
 
@@ -3113,7 +3116,7 @@ table.sliders tr td {
 }
 .daterangepicker .calendar th,
 .daterangepicker .calendar td {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Museo', sans-serif;
     font-weight: 300;
     text-align: center;
     white-space: nowrap;

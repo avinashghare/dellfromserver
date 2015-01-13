@@ -35,18 +35,41 @@ class HAuth extends CI_Controller {
                     {
                         $name=$user_profile->firstName.' '.$user_profile->lastName;
                         $dob=$user_profile->birthYear.'-'.$user_profile->birthMonth.'-'.$user_profile->birthDay;
-                        $this->db->query("UPDATE `user` SET `facebookid`='$user_profile->identifier',`name`='$name',`sex`='$user_profile->gender',`dob`='$dob',`image`='$user_profile->photoURL' WHERE `id`='$userid'");
-                        
-                        $data = $this->session->all_userdata();
-                        $data['facebook'] = $user_profile->identifier;
-                        $this->session->set_userdata($data); 
+                        $newid=$user_profile->identifier;
+                        $checkfacebook=$this->db->query("SELECT count(*) as `count1` FROM `user` WHERE `facebookid`='$newid'")->row();
+                        if($checkfacebook->count1=='0')
+                        {
+                            $this->db->query("UPDATE `user` SET `facebookid`='$user_profile->identifier',`name`='$name',`sex`='$user_profile->gender',`dob`='$dob',`image`='$user_profile->photoURL' WHERE `id`='$userid'");
+
+                            $data = $this->session->all_userdata();
+                            $data['alertsuccess']="Successfully loggedin with Facebook Account.";
+                            $data['facebook'] = $user_profile->identifier;
+                            $this->session->set_userdata($data);
+                        }
+                        else
+                        {
+                            $data['alerterror']="An another user has already logged in to Facebook acount using same login.";
+                            $service->logout(); 
+                        }
                     }
                     if ($this->uri->segment(3) == 'Twitter')
                     {
-                        $this->db->query("UPDATE `user` SET `twitterid`='$user_profile->identifier' WHERE `id`='$userid'");
-                        $data = $this->session->all_userdata();
-                        $data['twitter'] = $user_profile->identifier;
-                        $this->session->set_userdata($data); 
+                        $newid=$user_profile->identifier;
+                        $checktwitter=$this->db->query("SELECT count(*) as `count1` FROM `user` WHERE `twitterid`='$newid'")->row();
+                        if($checktwitter->count1=='0')
+                        {
+                            $this->db->query("UPDATE `user` SET `twitterid`='$user_profile->identifier' WHERE `id`='$userid'");
+                            $data = $this->session->all_userdata();
+                            $data['alertsuccess']="Successfully loggedin with Twitter Account.";
+                            $data['twitter'] = $user_profile->identifier;
+                            $this->session->set_userdata($data); 
+                            
+                        }
+                        else
+                        {
+                            $data['alerterror']="An another user has already logged in to Twitter acount using same login.";
+                            $service->logout(); 
+                        }
                     }
                     
                     $data['redirect']="site/index";
