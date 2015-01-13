@@ -16,6 +16,7 @@
                 <table class="table table-striped table-hover" id="" cellpadding="0" cellspacing="0" >
                 <thead>
                     <tr>
+                        <th data-field="username">User</th>
                         <th data-field="text">text</th>
                         <th data-field="image">image</th>
                         <th data-field="suggestionstatus">Status</th>
@@ -39,7 +40,7 @@
                 {
                     resultrow.adminstatus="";
                 }
-                return "<tr><td>" + resultrow.text + "</td><td><img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'></td><td>" + resultrow.suggestionstatus + "</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editsuggestion?id=');?>"+resultrow.id +"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' href='<?php echo site_url('site/deletesuggestion?id='); ?>"+resultrow.id +"'><i class='icon-trash '></i></td></tr>";
+                return "<tr><td>" + resultrow.username + "</td><td>" + resultrow.text + "</td><td><img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'></td><td>" + resultrow.suggestionstatus + "</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editsuggestion?id=');?>"+resultrow.id +"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' href='<?php echo site_url('site/deletesuggestion?id='); ?>"+resultrow.id +"'><i class='icon-trash '></i></td></tr>";
             }
             generatejquery('<?php echo $base_url;?>');
         </script>

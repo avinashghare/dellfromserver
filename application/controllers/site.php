@@ -560,11 +560,125 @@ class Site extends CI_Controller
 		$data['before']=$this->user_model->beforeedit($this->input->get('id'));
 //		$data['before']=$this->user_model->beforeedit($userid);
 		$data['table']=$this->userpost_model->viewuserpostbyuser($userid);
+        $data['base_url'] = site_url("site/viewuserpostbyuserjson?id=$userid");
 		$data['page']='edituser';
 		$data['page2']='block/userblock';
 		$data['title']='Edit User';
 		$this->load->view('template',$data);
 	}
+    function viewuserpostbyuserjson()
+	{
+		$access = array("1","2");
+		$this->checkaccess($access);
+        
+//        SELECT `userpost`.`id`,`userpost`.`post`, `userpost`.`likes`, `userpost`.`comment`, `userpost`.`favourites`, `userpost`.`retweet`, `userpost`.`returnpostid`, `userpost`.`posttype`,`posttype`.`name` AS `posttypename`, `userpost`.`user`,`userpost`.`share`, `userpost`.`timestamp`,`user`.`name` AS `username`,`post`.`text` AS `posttext`
+//        FROM `userpost`
+//        LEFT OUTER JOIN `user` ON `user`.`id`=`userpost`.`user`
+//        LEFT OUTER JOIN `post` ON `post`.`id`=`userpost`.`post`
+//        LEFT OUTER JOIN `posttype` ON `posttype`.`id`=`userpost`.`posttype`
+//        WHERE `userpost`.`user`='$id'
+        $id=$this->input->get('id');
+        $elements=array();
+        $elements[0]=new stdClass();
+        $elements[0]->field="`userpost`.`id`";
+        $elements[0]->sort="1";
+        $elements[0]->header="ID";
+        $elements[0]->alias="id";
+        
+        
+        $elements[1]=new stdClass();
+        $elements[1]->field="`userpost`.`post`";
+        $elements[1]->sort="1";
+        $elements[1]->header="Post";
+        $elements[1]->alias="post";
+        
+        $elements[2]=new stdClass();
+        $elements[2]->field="`userpost`.`likes`";
+        $elements[2]->sort="1";
+        $elements[2]->header="Likes";
+        $elements[2]->alias="likes";
+        
+        $elements[3]=new stdClass();
+        $elements[3]->field="`userpost`.`comment`";
+        $elements[3]->sort="1";
+        $elements[3]->header="Comment";
+        $elements[3]->alias="comment";
+        
+        $elements[4]=new stdClass();
+        $elements[4]->field="`userpost`.`favourites`";
+        $elements[4]->sort="1";
+        $elements[4]->header="Favourites";
+        $elements[4]->alias="favourites";
+        
+        $elements[5]=new stdClass();
+        $elements[5]->field="`userpost`.`retweet`";
+        $elements[5]->sort="1";
+        $elements[5]->header="Retweet";
+        $elements[5]->alias="retweet";
+        
+        $elements[6]=new stdClass();
+        $elements[6]->field="`userpost`.`returnpostid`";
+        $elements[6]->sort="1";
+        $elements[6]->header="Return Post Id";
+        $elements[6]->alias="returnpostid";
+        
+        $elements[7]=new stdClass();
+        $elements[7]->field="`userpost`.`posttype`";
+        $elements[7]->sort="1";
+        $elements[7]->header="Post Type";
+        $elements[7]->alias="posttype";
+        
+        $elements[8]=new stdClass();
+        $elements[8]->field="`posttype`.`name`";
+        $elements[8]->sort="1";
+        $elements[8]->header="Posttype";
+        $elements[8]->alias="posttypename";
+        
+        $elements[9]=new stdClass();
+        $elements[9]->field="`userpost`.`share`";
+        $elements[9]->sort="1";
+        $elements[9]->header="Share";
+        $elements[9]->alias="share";
+        
+        $elements[10]=new stdClass();
+        $elements[10]->field="`user`.`name`";
+        $elements[10]->sort="1";
+        $elements[10]->header="User";
+        $elements[10]->alias="username";
+        
+        $elements[11]=new stdClass();
+        $elements[11]->field="`userpost`.`timestamp`";
+        $elements[11]->sort="1";
+        $elements[11]->header="Timestamp";
+        $elements[11]->alias="timestamp";
+        
+        $elements[12]=new stdClass();
+        $elements[12]->field="`userpost`.`user`";
+        $elements[12]->sort="1";
+        $elements[12]->header="userid";
+        $elements[12]->alias="userid";
+        
+        $search=$this->input->get_post("search");
+        $pageno=$this->input->get_post("pageno");
+        $orderby=$this->input->get_post("orderby");
+        $orderorder=$this->input->get_post("orderorder");
+        $maxrow=$this->input->get_post("maxrow");
+        if($maxrow=="")
+        {
+            $maxrow=20;
+        }
+        
+        if($orderby=="")
+        {
+            $orderby="id";
+            $orderorder="ASC";
+        }
+       
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `userpost` LEFT OUTER JOIN `user` ON `user`.`id`=`userpost`.`user` LEFT OUTER JOIN `post` ON `post`.`id`=`userpost`.`post` LEFT OUTER JOIN `posttype` ON `posttype`.`id`=`userpost`.`posttype` ","WHERE `userpost`.`user`='$id'","","","");
+        
+		$this->load->view("json",$data);
+	} 
+    
 	function editusersubmit()
 	{
 		$access = array("1");
@@ -1948,6 +2062,13 @@ class Site extends CI_Controller
         $elements[5]->alias="adminmessage";
         
         
+        $elements[6]=new stdClass();
+        $elements[6]->field="`user`.`name`";
+        $elements[6]->sort="1";
+        $elements[6]->header="User";
+        $elements[6]->alias="username";
+        
+        
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
         $orderby=$this->input->get_post("orderby");
@@ -1964,7 +2085,7 @@ class Site extends CI_Controller
             $orderorder="ASC";
         }
        
-        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `suggestion`");
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `suggestion` LEFT OUTER JOIN `user` ON `user`.`id`=`suggestion`.`user`");
         
 		$this->load->view("json",$data);
 	} 
