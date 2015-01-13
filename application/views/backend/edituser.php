@@ -125,7 +125,11 @@
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label" for="normal-field">facebookid</label>
 				  <div class="col-sm-4">
-					<input type="text" id="normal-field" class="form-control" name="facebookid" value="<?php echo set_value('facebookid',$before->facebookid);?>" readonly>
+					<input type="text" id="normal-field" class="form-control facebookvalue" name="facebookid" value="<?php echo set_value('facebookid',$before->facebookid);?>" readonly>
+				  </div>
+				  
+				  <div class="col-sm-2">
+				    <a class="btn btn-primary pull-right facebookidbutton">Clear</a>
 				  </div>
 				</div>
 				
@@ -133,7 +137,11 @@
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label" for="normal-field">twitterid</label>
 				  <div class="col-sm-4">
-					<input type="text" id="normal-field" class="form-control" name="twitterid" value="<?php echo set_value('twitterid',$before->twitterid);?>" readonly>
+					<input type="text" id="normal-field" class="form-control twittervalue" name="twitterid" value="<?php echo set_value('twitterid',$before->twitterid);?>" readonly>
+				  </div>
+				  
+				  <div class="col-sm-2">
+				    <a class="btn btn-primary pull-right twitteridbutton">Clear</a>
 				  </div>
 				</div>
 				
@@ -141,7 +149,11 @@
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label" for="normal-field">instagramid</label>
 				  <div class="col-sm-4">
-					<input type="text" id="normal-field" class="form-control" name="instagramid" value="<?php echo set_value('instagramid',$before->instagramid);?>" readonly>
+					<input type="text" id="normal-field" class="form-control instagramvalue" name="instagramid" value="<?php echo set_value('instagramid',$before->instagramid);?>" readonly>
+				  </div>
+				  
+				  <div class="col-sm-2">
+				    <a class="btn btn-primary pull-right instagramidbutton">Clear</a>
 				  </div>
 				</div>
 				
@@ -195,4 +207,21 @@
 			</div>
 		</section>
 	
+<script>
+    $(".facebookidbutton").click(function () {
+        console.log($( ".facebookvalue" ).text());
+        
+                $('.facebookvalue').val('');
+    });
+    $(".twitteridbutton").click(function () {
+        console.log($( ".twittervalue" ).text());
+        
+                $('.twittervalue').val('');
+    });
+    $(".instagramidbutton").click(function () {
+        console.log($( ".instagramvalue" ).text());
+        
+                $('.instagramvalue').val('');
+    });
+</script>
 
