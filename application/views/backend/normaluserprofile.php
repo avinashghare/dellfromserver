@@ -48,7 +48,15 @@
 			   <?php foreach($posts as $row) { ?>
 					<tr>
 						<td><?php echo $row->posttext;?></td>
-						<td><?php echo $row->posttypename;?></td>
+						<td><?php if($row->posttypename=='Twitter')
+                                                { 
+                                                    echo "<i style='color: #40A8D6;font-size: 50px;'class='fa fa-twitter'></i>";
+                                                }
+                                              else
+                                              {
+                                              echo "<i  style='color: #40A8D6;font-size: 50px;'class='fa fa-facebook-square'></i>";
+                                              }
+                            ?></td>
 						<td><?php echo $row->timestamp;?></td>
 						<td><?php if($row->posttype==1){
                                 echo "Likes: ".$row->likes.", Comments: ".$row->comment.", Shares: ".$row->share;
