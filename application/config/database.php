@@ -107,7 +107,7 @@ $active_record = TRUE;
 //
 $myserver=$_SERVER['SERVER_NAME'];
 
-if($myserver=="localhost")
+if($myserver!="localhost")
 {
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'dellcamp_main';
