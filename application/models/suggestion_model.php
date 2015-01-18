@@ -49,6 +49,10 @@ class suggestion_model extends CI_Model
 	{
 		$query=$this->db->query("DELETE FROM `suggestion` WHERE `id`='$id'");
 	}
+    function approvesuggestion($id)
+	{
+		$query=$this->db->query("UPDATE `suggestion` SET `suggestionstatus` = 'Publish' WHERE `id`='$id'");
+	}
     
 	public function getsuggestionimagebyid($id)
 	{

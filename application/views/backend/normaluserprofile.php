@@ -1,5 +1,3 @@
-
-
 <div class="user-profile">
    <div class="user-imgnm">
       <div  class="user-img">
@@ -11,10 +9,10 @@
        </div>
    </div>
    <div class="userprf-head">
-       <h5><?php echo $table->email;?><br><br></h5>
-       <h5><?php echo $table->contact;?><br></h5>
+       <h5><?php echo $table->email;?><br></h5>
+       <h5><?php if($table->contact==""){ echo "NA";} else{ echo $table->contact; }?><br></h5>
        <h5><?php echo $table->sex;?><br></h5>
-       <h5><?php echo "DOB: ".$table->dob;?><br></h5>
+       <h5><?php echo "Date of Birth: ".$table->dob;?><br></h5>
        <h5><?php echo "Studied at ".$table->collegename;?><br></h5>
        
 <div class=" row" style="padding:1% 0;">
@@ -48,15 +46,7 @@
 			   <?php foreach($posts as $row) { ?>
 					<tr>
 						<td><?php echo $row->posttext;?></td>
-						<td><?php if($row->posttypename=='Twitter')
-                                                { 
-                                                    echo "<i style='color: #40A8D6;font-size: 50px;'class='fa fa-twitter'></i>";
-                                                }
-                                              else
-                                              {
-                                              echo "<i  style='color: #40A8D6;font-size: 50px;'class='fa fa-facebook-square'></i>";
-                                              }
-                            ?></td>
+						<td><?php echo $row->posttypename;?></td>
 						<td><?php echo $row->timestamp;?></td>
 						<td><?php if($row->posttype==1){
                                 echo "Likes: ".$row->likes.", Comments: ".$row->comment.", Shares: ".$row->share;

@@ -33,7 +33,7 @@
 				  <div class="col-sm-4">
 					<?php
 						
-						echo form_dropdown('suggestionstatus',$suggestionstatus,set_value('suggestionstatus',$before->suggestionstatus),'class="chzn-select formsuggestion form-control" 	data-placeholder="Choose a Status..."');
+						echo form_dropdown('suggestionstatus',$suggestionstatus,'Unpublish','class="chzn-select formsuggestion form-control" 	data-placeholder="Choose a Status..."');
 					?>
 				  </div>
 				</div>
@@ -63,6 +63,8 @@
 			</div>
 		</section>
 		<script>
+            $(document).ready(function() {
+                
                 $(".formsuggestion").change(function() {
                     var suggestionstatus=$(this).val();
                     if(suggestionstatus=='Unpublish')
@@ -77,6 +79,7 @@
                     {
                         $(".suggestionmessage").hide(100);
                     }
-    });
-   
+                });
+                $(".formsuggestion").trigger("change");
+            });
         </script>

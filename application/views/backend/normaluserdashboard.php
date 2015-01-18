@@ -80,6 +80,7 @@
 	<div class="col-md-12">
 		<section class="panel">
 			<div class="drawchintantable">
+			<?php $this->chintantable->createsearch("","","col-md-8","col-md-4");?>
 			<div class="row">
 			<div class="col-md-3">
        <h4 class="quickpost">Quick Post</h4>
@@ -135,8 +136,7 @@ border-radius: 100%;left:0;" aria-hidden="true"></span>
     </div>
         </div>
         <div class="col-md-9">
-        			<?php $this->chintantable->createsearch("Leaderboard","","col-md-8","col-md-4");?>
-
+        <h4 class="quickpost">Leader Board</h4>
         <table class="table table-striped table-hover" id="" cellpadding="0" cellspacing="0" >
                 <thead>
                     <tr>

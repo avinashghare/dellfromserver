@@ -52,13 +52,21 @@
                 {
                     status="Pending";
                 }
-                if(resultrow.suggestionstatus=="Publish")
+                if(resultrow.image=="")
                 {
-                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td><img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'></td><td>"+status+"</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td><a href='#' class='btn btn-primary'  onclick=\"postsocial('"+resultrow.id+"','"+resultrow.text+"','" + base_url + "uploads/" + resultrow.image + "','facebook','')\">Publish</a></td><tr>";
+                    resultrow.image="NA";
                 }
                 else
                 {
-                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td><img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'></td><td>"+status+"</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td></td><tr>";
+                     resultrow.image="<img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'>";
+                }
+                if(resultrow.suggestionstatus=="Publish")
+                {
+                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td>"+resultrow.image+"</td><td>"+status+"</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td><a href='#' class='btn btn-primary'  onclick=\"postsocial('"+resultrow.id+"','"+resultrow.text+"','" + base_url + "uploads/" + resultrow.image + "','facebook','')\">Publish</a></td><tr>";
+                }
+                else
+                {
+                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td>"+resultrow.image+"</td><td>"+status+"</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td></td><tr>";
                 }
             }
             generatejquery('<?php echo $base_url;?>');

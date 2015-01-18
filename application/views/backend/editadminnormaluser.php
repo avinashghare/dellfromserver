@@ -6,6 +6,27 @@
 		<a class="btn btn-primary pull-right"  href="<?php echo site_url('site/createuserpost?id=').$this->input->get('id'); ?>"><i class="icon-plus"></i>Create </a> &nbsp; 
 	</div>
 -->
+<div class="user-profile">
+   <div class="user-imgnm">
+      <div  class="user-img">
+       <img src="<?php echo $before->image;?>"><br>
+       
+       <div class="username">
+       <h4><?php echo $before->name;?></h4>
+       </div>
+       </div>
+   </div>
+   <div class="userprf-head">
+       <h5><?php echo $before->email;?><br></h5>
+       <h5><?php if($before->contact==""){ echo "NA";} else{ echo $before->contact; }?><br></h5>
+       <h5><?php echo $before->sex;?><br></h5>
+       <h5><?php echo "Date of Birth: ".$before->dob;?><br></h5>
+       <h5><?php echo "Studied at ".$before->collegename;?><br></h5>
+       
+
+   </div>
+   <div class="clearfix"></div>
+</div>
 	
 </div>
 <div class="row">

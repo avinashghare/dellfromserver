@@ -6,7 +6,7 @@
 	<div class="col-lg-12">
 		<section class="panel">
 			<header class="panel-heading">
-                Students List
+                Leader Board 
             </header>
 			<div class="drawchintantable">
                 <table class="table table-striped table-hover" id="" cellpadding="0" cellspacing="0" >

@@ -1987,9 +1987,9 @@ class Site extends CI_Controller
             }
             
 			if($this->suggestion_model->edit($id,$text,$image,$user,$suggestionstatus,$message)==0)
-			$data['alerterror']="suggestion Editing was unsuccesful";
+			$data['alerterror']="Suggestion Editing was unsuccesful";
 			else
-			$data['alertsuccess']="suggestion edited Successfully.";
+			$data['alertsuccess']="Suggestion Edited Successfully.";
 			
 			$data['redirect']="site/viewadminsuggestion";
 			//$data['other']="template=$template";
@@ -2000,14 +2000,24 @@ class Site extends CI_Controller
 	
 	function deletesuggestion()
 	{
-		$access = array("2");
+		$access = array("1");
 		$this->checkaccess($access);
 		$this->suggestion_model->deletesuggestion($this->input->get('id'));
-		$data['alertsuccess']="suggestion Deleted Successfully";
-		$data['redirect']="site/viewsuggestion";
+		$data['alertsuccess']="Suggestion Deleted Successfully";
+		$data['redirect']="site/viewadminsuggestion";
 		$this->load->view("redirect",$data);
 	}
     
+    function approvesuggestion()
+	{
+		$access = array("1");
+		$this->checkaccess($access);
+		$this->suggestion_model->approvesuggestion($this->input->get('id'));
+		$data['alertsuccess']="Suggestion Approved Successfully";
+		$data['redirect']="site/viewadminsuggestion";
+		$this->load->view("redirect",$data);
+	}
+        
     function viewadminsuggestion()
 	{
 		$access = array("1");

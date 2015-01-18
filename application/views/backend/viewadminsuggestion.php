@@ -40,7 +40,21 @@
                 {
                     resultrow.adminstatus="";
                 }
-                return "<tr><td>" + resultrow.username + "</td><td>" + resultrow.text + "</td><td><img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'></td><td>" + resultrow.suggestionstatus + "</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editsuggestion?id=');?>"+resultrow.id +"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' href='<?php echo site_url('site/deletesuggestion?id='); ?>"+resultrow.id +"'><i class='icon-trash '></i></td></tr>";
+                if(resultrow.image=="")
+                {
+                    resultrow.image="NA";
+                }
+                else
+                {
+                     resultrow.image="<img src='<?php echo base_url('uploads');?>/" + resultrow.image + "' width='100px' height='auto'>";
+                }
+                var buttonsfor="";
+                if(resultrow.suggestionstatus=="Pending")
+                {
+                    buttonsfor="<a class='btn btn-success btn-xs' href='<?php echo site_url('site/approvesuggestion?id=');?>"+resultrow.id +"'><i class='fa fa-check'></i></a><a class='btn btn-danger btn-xs' href='<?php echo site_url('site/editsuggestion?id='); ?>"+resultrow.id +"'><i class='fa fa-times '></i></a>";
+                }
+                
+                return "<tr><td>" + resultrow.username + "</td><td>" + resultrow.text + "</td><td>"+ resultrow.image+"</td><td>" + resultrow.suggestionstatus + "</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td>"+buttonsfor+"</td></tr>";
             }
             generatejquery('<?php echo $base_url;?>');
         </script>

@@ -58,7 +58,7 @@
 	<div class="col-lg-12">
 		<section class="panel">
 			<div class="drawchintantable">
-                <?php $this->chintantable->createsearch("LEADERBOARD");?>
+                <?php $this->chintantable->createsearch("Campassadors List");?>
                 <table class="table table-striped table-hover" id="" cellpadding="0" cellspacing="0" >
                 <thead>
                     <tr>

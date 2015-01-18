@@ -1,38 +1,5 @@
-<div class="row">
-	<div class="col-lg-12">
-		<section class="panel">
-			<div class="drawchintantable">
-                <?php $this->chintantable->createsearch("User Post List");?>
-                <table class="table table-striped table-hover" id="" cellpadding="0" cellspacing="0" >
-                <thead>
-                    <tr>
-<!--                        <th data-field="id">Id</th>-->
-                        <th data-field="username">User</th>
-                        <th data-field="posttypename">Posttype</th>
-                        <th data-field="likes">likes</th>
-                        <th data-field="share">share</th>
-                        <th data-field="favourites">favourites</th>
-                        <th data-field="retweet">retweet</th>
-                        <th data-field="timestamp">timestamp</th>
-                        <th data-field="Action">action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                   
-                </tbody>
-                </table>
-                   <?php $this->chintantable->createpagination();?>
-            </div>
-		</section>
-		<script>
-            function drawtable(resultrow) {
-                
-                return "<tr><td>" + resultrow.username + "</td><td>" + resultrow.posttypename + "</td><td>" + resultrow.likes + "</td><td>" + resultrow.share + "</td><td>" + resultrow.favourites + "</td><td>" + resultrow.retweet + "</td><td>" + resultrow.timestamp + "</td><td><a class='btn btn-round btn-xs' href='<?php echo site_url('site/edituserpost?id=');?>"+resultrow.userid +"&userpostid="+resultrow.id+"'><i class='icon-pencil'></i></a><a class='btn btn-round btn-xs' href='<?php echo site_url('site/deleteuser?id='); ?>"+resultrow.userid +"&userpostid="+resultrow.id+"' onclick=\"return confirm('Are you sure?')\"><i class='icon-trash '></i></a><tr>";
-            }
-            generatejquery('<?php echo $base_url;?>');
-        </script>
-	</div>
-</div>
+
+
 
 	    	    <section class="panel">
 		    <header class="panel-heading">
@@ -87,14 +54,14 @@
 				</div>
 				
 				<div class=" form-group">
-				  <label class="col-sm-2 control-label" for="normal-field">DOB</label>
+				  <label class="col-sm-2 control-label" for="normal-field">Date of Birth</label>
 				  <div class="col-sm-4">
 					<input type="date" id="d" class="form-control" name="dob" value="<?php echo set_value('dob',$before->dob);?>">
 				  </div>
 				</div>
 				
 				<div class=" form-group">
-				  <label class="col-sm-2 control-label" for="normal-field">facebookid</label>
+				  <label class="col-sm-2 control-label" for="normal-field">facebook Id</label>
 				  <div class="col-sm-4">
 					<input type="text" id="normal-field" class="form-control facebookvalue" name="facebookid" value="<?php echo set_value('facebookid',$before->facebookid);?>" readonly>
 				  </div>
@@ -106,7 +73,7 @@
 				
 				
 				<div class=" form-group">
-				  <label class="col-sm-2 control-label" for="normal-field">twitterid</label>
+				  <label class="col-sm-2 control-label" for="normal-field">twitter Id</label>
 				  <div class="col-sm-4">
 					<input type="text" id="normal-field" class="form-control twittervalue" name="twitterid" value="<?php echo set_value('twitterid',$before->twitterid);?>" readonly>
 				  </div>
@@ -118,7 +85,7 @@
 				
 				
 				<div class=" form-group">
-				  <label class="col-sm-2 control-label" for="normal-field">instagramid</label>
+				  <label class="col-sm-2 control-label" for="normal-field">instagram Id</label>
 				  <div class="col-sm-4">
 					<input type="text" id="normal-field" class="form-control instagramvalue" name="instagramid" value="<?php echo set_value('instagramid',$before->instagramid);?>" readonly>
 				  </div>
@@ -195,4 +162,3 @@
                 $('.instagramvalue').val('');
     });
 </script>
-
