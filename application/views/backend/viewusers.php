@@ -6,9 +6,10 @@
 	<div class="col-lg-12">
 		<section class="panel">
 			<header class="panel-heading">
-                Users List
+                Admin List
             </header>
 			<div class="drawchintantable">
+               <?php $this->chintantable->createsearch("");?>
                 <table class="table table-striped table-hover" id="" cellpadding="0" cellspacing="0" >
                 <thead>
                     <tr>
