@@ -20,7 +20,8 @@
                         <th data-field="text">text</th>
                         <th data-field="image">image</th>
                         <th data-field="suggestionstatus">Status</th>
-                        <th data-field="adminmessage">Admin Message</th>
+                        <th data-field="posttype">Platform</th>
+<!--                        <th data-field="adminmessage">Admin Message</th>-->
                         <th data-field="timestamp">Timestamp</th>
                         <th data-field="action"> Actions </th>
                     </tr>
@@ -37,6 +38,15 @@
                 if(!resultrow.adminstatus)
                 {
                     resultrow.adminstatus="";
+                }
+                var sociallogo="";
+                if(resultrow.posttype==2)
+                {
+                    sociallogo="<i style='color: #40A8D6;font-size: 25px;'class='fa fa-twitter'></i>";
+                }
+                else if(resultrow.posttype==1)
+                {
+                    sociallogo="<i  style='color: #40A8D6;font-size: 25px;'class='fa fa-facebook-square'></i>";
                 }
                 var status="";
                 
@@ -62,7 +72,15 @@
                 }
                 if(resultrow.suggestionstatus=="Publish")
                 {
-                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td>"+resultrow.image+"</td><td>"+status+"</td><td>" + resultrow.adminmessage + "</td><td>" + resultrow.timestamp + "</td><td><a href='#' class='btn btn-primary'  onclick=\"postsocial('"+resultrow.id+"','"+resultrow.text+"','" + base_url + "uploads/" + resultrow.image + "','facebook','')\">Publish</a></td><tr>";
+                    if(resultrow.posttype==1)
+                    {
+                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td>"+resultrow.image+"</td><td>"+status+"</td><td>" + sociallogo + "</td><td>" + resultrow.timestamp + "</td><td><a href='#' style='width:80px;' class='btn btn-primary'  onclick=\"postsocial('"+resultrow.id+"','"+resultrow.text+"','" + base_url + "uploads/" + resultrow.image + "','facebook','"+resultrow.link+"')\"><i class='fa fa-facebook'></i> Post</a></td><tr>";
+                    }
+                    else if(resultrow.posttype==2)
+                    {
+                return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.text + "</td><td>"+resultrow.image+"</td><td>"+status+"</td><td>" + sociallogo+ "</td><td>" + resultrow.timestamp + "</td><td><a href='#' style='width:80px;' class='btn btn-primary'  onclick=\"postsocial('"+resultrow.id+"','"+resultrow.text+"','" + base_url + "uploads/" + resultrow.image + "','twitter','')\"><i class='fa fa-twitter'></i> Tweet</a></td><tr>";
+                    }
+                    
                 }
                 else
                 {

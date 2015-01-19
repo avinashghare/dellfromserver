@@ -1807,6 +1807,18 @@ class Site extends CI_Controller
         $elements[5]->header="Admin Message";
         $elements[5]->alias="adminmessage";
         
+        $elements[6]=new stdClass();
+        $elements[6]->field="`suggestion`.`posttype`";
+        $elements[6]->sort="1";
+        $elements[6]->header="Posttype";
+        $elements[6]->alias="posttype";
+        
+        $elements[7]=new stdClass();
+        $elements[7]->field="`suggestion`.`link`";
+        $elements[7]->sort="1";
+        $elements[7]->header="Link";
+        $elements[7]->alias="link";
+        
         
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
@@ -1834,6 +1846,7 @@ class Site extends CI_Controller
 		$access = array("2");
 		$this->checkaccess($access);
 		$data[ 'page' ] = 'createsuggestion';
+        $data['posttype']=$this->post_model->getposttypedropdown();
         $data['suggestionstatus']=$this->suggestion_model->getsuggestionstatusdropdown();
 		$data[ 'title' ] = 'Create suggestion';
 		$this->load->view( 'template', $data );	
@@ -1843,17 +1856,22 @@ class Site extends CI_Controller
 		$access = array("2");
 		$this->checkaccess($access);
 		$this->form_validation->set_rules('text','text','trim|required');
+		$this->form_validation->set_rules('posttype','posttype','trim');
+		$this->form_validation->set_rules('link','link','trim');
 		if($this->form_validation->run() == FALSE)	
 		{
 			$data['alerterror'] = validation_errors();
             $data[ 'page' ] = 'createsuggestion';
             $data[ 'title' ] = 'Create suggestion';
+            $data['posttype']=$this->post_model->getposttypedropdown();
             $data['suggestionstatus']=$this->suggestion_model->getsuggestionstatusdropdown();
             $this->load->view( 'template', $data );	
 		}
 		else
 		{
             $text=$this->input->post('text');
+            $posttype=$this->input->post('posttype');
+            $link=$this->input->post('link');
             $userid=$this->session->userdata('id');
             $config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -1886,7 +1904,7 @@ class Site extends CI_Controller
                 
 			}
             
-			if($this->suggestion_model->create($text,$image,$userid)==0)
+			if($this->suggestion_model->create($text,$image,$userid,$posttype,$link)==0)
 			$data['alerterror']="New suggestion could not be created.";
 			else
 			$data['alertsuccess']="suggestion created Successfully.";

@@ -3,12 +3,14 @@ if ( !defined( 'BASEPATH' ) )
 	exit( 'No direct script access allowed' );
 class suggestion_model extends CI_Model
 {
-	public function create($text,$image,$user)
+	public function create($text,$image,$user,$posttype,$link)
 	{
 		$data  = array(
 			'text' => $text,
 			'user' => $user,
 			'suggestionstatus' => 'Pending',
+			'posttype' => $posttype,
+			'link' => $link,
 			'image' => $image
 		);
 		$query=$this->db->insert( 'suggestion', $data );
